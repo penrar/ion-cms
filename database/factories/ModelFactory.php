@@ -40,4 +40,6 @@ $factory->define(App\ArticleCategory::class, function (Faker\Generator $faker) {
         'title' => $faker->sentence,
         'slug' => $faker->slug,
     ];
+
+
 });

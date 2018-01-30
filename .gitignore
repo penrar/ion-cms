@@ -1,6 +1,9 @@
 /vendor
 /node_modules
+.idea/*
+/storage/debugbar/*
 Homestead.yaml
 Homestead.json
 .env
 composer.lock
+/resources/vendor/*

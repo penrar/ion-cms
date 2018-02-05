@@ -10,15 +10,25 @@ Route::model('user', 'App\User');
 Route::pattern('id', '[0-9]+');
 Route::pattern('slug', '[0-9a-z-_]+');
 
+
+Route::model('order', 'App\Order');
+Route::model('customer', 'App\Customer');
+
+
+//Route::get('order/{order}/show', 'Admin\PhotoController@show');
+//Route::get('photo/{order}/edit', 'Admin\PhotoController@edit');
+//Route::get('photo/{order}/delete', 'Admin\PhotoController@delete');
+//Route::resource('photo', 'Admin\PhotoController');
+
 /***************    Site routes  **********************************/
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
-Route::get('about', 'PagesController@about');
-Route::get('contact', 'PagesController@contact');
-Route::get('articles', 'ArticlesController@index');
-Route::get('article/{slug}', 'ArticlesController@show');
-Route::get('video/{id}', 'VideoController@show');
-Route::get('photo/{id}', 'PhotoController@show');
+//Route::get('about', 'PagesController@about');
+//Route::get('contact', 'PagesController@contact');
+//Route::get('articles', 'ArticlesController@index');
+//Route::get('article/{slug}', 'ArticlesController@show');
+//Route::get('video/{id}', 'VideoController@show');
+//Route::get('photo/{id}', 'PhotoController@show');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',

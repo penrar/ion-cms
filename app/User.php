@@ -24,5 +24,11 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function role() {
+        return $this->hasOne(Role::class, 'role_id');
+    }
 
+    public function actions() {
+        return $this->hasMany('App\Action');
+    }
 }

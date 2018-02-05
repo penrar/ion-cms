@@ -14,7 +14,17 @@ class CreateBorrowersTable extends Migration
     {
         Schema::create('borrowers', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('borrowerable_id');
+            $table->string('borrowerable_type', 30);
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::create('borrower_order', function(Blueprint $table) {
+            $table->unsignedInteger('borrower_id');
+            $table->foreign('borrower_id')->references('id')->on('borrowers');
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

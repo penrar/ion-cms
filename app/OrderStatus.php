@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderStatus extends Model
 {
-    //
+    protected $guarded = ['id'];
+
+    public function order() {
+        return $this->belongsToMany('App\Order');
+    }
 }

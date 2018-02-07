@@ -21,7 +21,11 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'product_name' => 'Title Insurance'
+            'product_name' => 'Closing'
+        ]);
+
+        Product::create([
+            'product_name' => 'Recording'
         ]);
     }
 }

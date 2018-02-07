@@ -15,4 +15,8 @@ class Customer extends Model
         return $this->morphTo();
 //        return $this->morphOne('App\Contact', 'customerable');
     }
+
+    public function order() {
+        return $this->hasMany('App\Order');
+    }
 }

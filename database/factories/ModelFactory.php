@@ -15,23 +15,25 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'username' => $faker->userName,
+        'role_id' => rand(1,4),
+        'password' => bcrypt('password'),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Article::class, function (Faker\Generator $faker) {
-    return [
-        'language_id' => rand(1, 3),
-        'user_id' => 1,
-        'article_category_id' => rand(1, 2),
-        'title' => $faker->sentence,
-        'slug' => $faker->slug,
-        'introduction' => $faker->paragraph,
-        'content' => $faker->text,
-        'source' => $faker->url,
-    ];
-});
+//$factory->define(App\Article::class, function (Faker\Generator $faker) {
+//    return [
+//        'language_id' => rand(1, 3),
+//        'user_id' => 1,
+//        'article_category_id' => rand(1, 2),
+//        'title' => $faker->sentence,
+//        'slug' => $faker->slug,
+//        'introduction' => $faker->paragraph,
+//        'content' => $faker->text,
+//        'source' => $faker->url,
+//    ];
+//});
 
 $factory->define(App\ArticleCategory::class, function (Faker\Generator $faker) {
     return [
@@ -40,6 +42,36 @@ $factory->define(App\ArticleCategory::class, function (Faker\Generator $faker) {
         'title' => $faker->sentence,
         'slug' => $faker->slug,
     ];
+});
 
+$factory->define(App\Property::class, function (Faker\Provider\en_US\Address $address) {
+    return [
+        'address1' => $address->address(),
+        'address2' => $address->secondaryAddress(),
+        'city' => $address->city(),
+        'state' => $address->stateAbbr(),
+        'zip_code' => $address->postcode()
+    ];
+});
 
+$factory->define(App\Contact::class, function (Faker\Generator $faker, Faker\Provider\en_US\Address $address) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'phone_number' => $faker->phoneNumber,
+        'address1' => $address->address(),
+        'address2' => $address->secondaryAddress(),
+        'city' => $address->city(),
+        'state' => $address->stateAbbr(),
+        'zip_code' => $address->postcode()
+    ];
+});
+
+$factory->define(\App\Company::class, function(Faker\Generator $faker, Faker\Provider\en_US\Address $address){
+    return [
+        'address1' => $address->address(),
+        'city' => $address->city(),
+        'state' => $address->stateAbbr(),
+        'zip_code' => $address->postcode()
+    ];
 });

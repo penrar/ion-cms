@@ -12,7 +12,7 @@ class Contact extends Model
     protected $table = 'contacts';
 
     public function company() {
-        return $this->belongsToMany('App\Company');
+        return $this->hasOne('App\Company');
     }
 
     public function borrower() {

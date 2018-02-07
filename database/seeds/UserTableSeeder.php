@@ -12,9 +12,7 @@ class UserTableSeeder extends Seeder {
 			'username' => 'admin_user',
 			'email' => 'admin@admin.com',
 			'password' => bcrypt('admin'),
-			'confirmed' => 1,
-            'admin' => 1,
-			'confirmation_code' => md5(microtime() . env('APP_KEY')),
+			'role_id' => 1,
 		]);
 
 		\App\User::create([
@@ -22,9 +20,9 @@ class UserTableSeeder extends Seeder {
 			'username' => 'test_user',
 			'email' => 'user@user.com',
 			'password' => bcrypt('user'),
-			'confirmed' => 1,
-			'confirmation_code' => md5(microtime() . env('APP_KEY')),
 		]);
+
+		factory(\App\User::class, 5)->create();
 
 	}
 

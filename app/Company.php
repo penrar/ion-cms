@@ -10,7 +10,7 @@ class Company extends Model
     use SoftDeletes;
     //
     public function contact() {
-        return $this->hasOne('App\Contact');
+        return $this->belongsTo('App\Contact');
     }
 
     public function borrower() {

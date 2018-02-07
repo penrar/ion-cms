@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // Add calls to Seeders here
+        $this->call(RolesTableSeeder::class);
+        $this->call(ContactTableSeeder::class);
+        $this->call(PropertiesTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->command->info('Admin User created with username admin@admin.com and password admin');
         $this->command->info('Test User created with username user@user.com and password user');

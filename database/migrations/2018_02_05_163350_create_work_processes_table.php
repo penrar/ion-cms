@@ -34,6 +34,7 @@ class CreateWorkProcessesTable extends Migration
      */
     public function down()
     {
+        Schema::drop('order_work_processes');
         Schema::drop('work_processes');
     }
 }

@@ -35,6 +35,7 @@ class CreateBorrowersTable extends Migration
      */
     public function down()
     {
+        Schema::drop('borrower_order');
         Schema::drop('borrowers');
     }
 }

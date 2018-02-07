@@ -18,8 +18,5 @@ class CompaniesTableSeeder extends Seeder
         foreach($contacts as $contact) {
             $contact->company()->save(factory(Company::class)->make());
         }
-
-
-
     }
 }

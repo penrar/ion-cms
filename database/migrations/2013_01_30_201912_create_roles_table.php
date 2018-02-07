@@ -17,6 +17,7 @@ class CreateRolesTable extends Migration
             $table->string('role_name', 30);
             $table->string('role_code', 20);
             $table->integer('role_level');
+            $table->timestamps();
         });
     }
 

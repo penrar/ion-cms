@@ -16,8 +16,8 @@ class CreateBorrowersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('borrowerable_id');
             $table->string('borrowerable_type', 30);
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('borrower_order', function(Blueprint $table) {

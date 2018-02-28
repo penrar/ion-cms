@@ -16,9 +16,20 @@
                 <li class="{{ (Request::is('/') ? 'active' : '') }}">
                     <a href="{{ url('') }}"><i class="fa fa-home"></i> Home</a>
                 </li>
-                <li class="{{ (Request::is('articles') ? 'active' : '') }}">
-                    <a href="{{ url('orders') }}">Orders</a>
-                </li>
+
+                @if(Auth::check() && Role::atLeast(30))
+                    <li class="{{ (Request::is('orders') ? 'active' : '') }}">
+                        <a href="{{ url('orders') }}">Orders</a>
+                    </li>
+                @endif
+
+                @if(Auth::check() && Role::hasRole('customer'))
+                    <li class="{{ (Request::is('orders') ? 'active' : '') }}">
+                        <a href="{{ url('orders') }}">Orders</a>
+                    </li>
+                @endif
+
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

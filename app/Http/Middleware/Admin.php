@@ -46,12 +46,12 @@ class Admin implements Middleware {
         if ($this->auth->check())
         {
             $admin = 0;
-            if($this->auth->user()->admin==1 || $this->auth->user()->role->role_code == 'admin')
+            if($this->auth->user()->admin==1 || $this->auth->user()->role->code == 'admin')
             {
                 $admin=1;
             }
             if($admin==0){
-                return $this->response->redirectTo('/');
+                return $this->response->redirectTo('/')->withErrors('You do not have permission to access that resource');
             }
             return $next($request);
         }

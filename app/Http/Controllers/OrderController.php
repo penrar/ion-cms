@@ -20,6 +20,10 @@ class OrderController extends Controller
         $orders = Order::all();
         return view('orders.index', compact('orders'));
     }
+
+    public function myOrders(Request $request) {
+
+    }
     
     public function search(Request $request) {
         

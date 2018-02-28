@@ -32,8 +32,11 @@
 @include('partials.nav')
 
 <div class="container">
+@include('notifications')
+    
 @yield('content')
 </div>
+
 @include('partials.footer')
 
 <!-- Scripts -->

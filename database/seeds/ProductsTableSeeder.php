@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('products')->delete();
+
         Product::create([
             'product_name' => 'Title Search'
         ]);

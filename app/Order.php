@@ -33,4 +33,8 @@ class Order extends Model
     public function property() {
         return $this->hasOne('App\Property');
     }
+
+    public function workprocess() {
+        return $this->belongsToMany('App\WorkProcess', 'order_work_process');
+    }
 }

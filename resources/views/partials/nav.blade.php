@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Laravel</a>
+            <a class="navbar-brand" href="#">ION-CMS</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -17,13 +17,7 @@
                     <a href="{{ url('') }}"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li class="{{ (Request::is('articles') ? 'active' : '') }}">
-                    <a href="{{ url('articles') }}">Articles</a>
-                </li>
-                <li class="{{ (Request::is('about') ? 'active' : '') }}">
-                    <a href="{{ url('about') }}">About</a>
-                </li>
-                <li class="{{ (Request::is('contact') ? 'active' : '') }}">
-                    <a href="{{ url('contact') }}">Contact</a>
+                    <a href="{{ url('orders') }}">Orders</a>
                 </li>
             </ul>
 
@@ -31,8 +25,8 @@
                 @if (Auth::guest())
                     <li class="{{ (Request::is('auth/login') ? 'active' : '') }}"><a href="{{ url('auth/login') }}"><i
                                     class="fa fa-sign-in"></i> Login</a></li>
-                    <li class="{{ (Request::is('auth/register') ? 'active' : '') }}"><a
-                                href="{{ url('auth/register') }}">Register</a></li>
+                    {{--<li class="{{ (Request::is('auth/register') ? 'active' : '') }}"><a--}}
+                                {{--href="{{ url('auth/register') }}">Register</a></li>--}}
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"

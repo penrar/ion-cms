@@ -14,6 +14,8 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('company_name', 120);
             $table->string('phone_number', 12);
             $table->string('address1', 80);

@@ -1,11 +1,11 @@
 <?php
 
 /****************   Model binding into route **************************/
-Route::model('article', 'App\Article');
-Route::model('articlecategory', 'App\ArticleCategory');
-Route::model('language', 'App\Language');
-Route::model('photoalbum', 'App\PhotoAlbum');
-Route::model('photo', 'App\Photo');
+//Route::model('article', 'App\Article');
+//Route::model('articlecategory', 'App\ArticleCategory');
+//Route::model('language', 'App\Language');
+//Route::model('photoalbum', 'App\PhotoAlbum');
+//Route::model('photo', 'App\Photo');
 Route::model('user', 'App\User');
 Route::pattern('id', '[0-9]+');
 Route::pattern('slug', '[0-9a-z-_]+');
@@ -14,6 +14,14 @@ Route::pattern('slug', '[0-9a-z-_]+');
 Route::model('order', 'App\Order');
 Route::model('customer', 'App\Customer');
 
+Route::group(['middleware' => 'admin'], function() {
+    Route::get('orders', 'OrderController@index');
+    Route::get('orders/search', 'OrderController@search');
+    Route::get('orders/{id}', 'OrderController@show');
+    Route::get('orders/{id}/edit', 'OrderController@edit');
+    Route::post('orders/{id}', 'OrderController@update');
+    Route::post('orders/{id}/restore', 'OrderController@restore');
+});
 
 //Route::get('order/{order}/show', 'Admin\PhotoController@show');
 //Route::get('photo/{order}/edit', 'Admin\PhotoController@edit');
@@ -40,13 +48,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 
     # Admin Dashboard
     Route::get('dashboard', 'Admin\DashboardController@index');
-
-    # Language
-    Route::get('language/data', 'Admin\LanguageController@data');
-    Route::get('language/{language}/show', 'Admin\LanguageController@show');
-    Route::get('language/{language}/edit', 'Admin\LanguageController@edit');
-    Route::get('language/{language}/delete', 'Admin\LanguageController@delete');
-    Route::resource('language', 'Admin\LanguageController');
 
     # Article category
     Route::get('articlecategory/data', 'Admin\ArticleCategoriesController@data');

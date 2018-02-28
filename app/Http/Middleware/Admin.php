@@ -5,8 +5,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-use App\AssignedRoles;
-
 class Admin implements Middleware {
 
     /**
@@ -48,7 +46,7 @@ class Admin implements Middleware {
         if ($this->auth->check())
         {
             $admin = 0;
-            if($this->auth->user()->admin==1)
+            if($this->auth->user()->admin==1 || $this->auth->user()->role->role_code == 'admin')
             {
                 $admin=1;
             }

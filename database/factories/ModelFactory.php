@@ -82,6 +82,7 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
 
 $factory->define(\App\Company::class, function(Faker\Generator $faker){
     return [
+        'company_name' => $faker->company,
         'address1' => $faker->address,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,

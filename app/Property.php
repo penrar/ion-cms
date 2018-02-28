@@ -12,7 +12,15 @@ class Property extends Model
     protected $guarded = ['id'];
 
     public function order() {
-        return $this->belongsTo('App\Order');
+        return $this->hasMany('App\Order');
+    }
+
+    public function getFullAddressAttribute() {
+        return $this->address1 . ', ' . $this->address2 . ' ' . $this->city . ' ' . $this->state . ', ' . $this->zip_code;
+    }
+
+    public function getAddressAttribute() {
+        return $this->address1 . ', ' . $this->address2;
     }
 
 }

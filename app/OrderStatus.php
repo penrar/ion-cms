@@ -9,6 +9,10 @@ class OrderStatus extends Model
     protected $guarded = ['id'];
 
     public function order() {
-        return $this->belongsToMany('App\Order');
+        return $this->hasMany('App\Order', 'order_status_id');
+    }
+
+    public function getStatusAttribute() {
+        return $this->status_name;
     }
 }

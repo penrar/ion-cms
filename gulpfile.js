@@ -14,6 +14,7 @@ var paths = {
     'bootswatch': vendors + '/bootswatch/simplex',
     'fontawesome': vendors + '/font-awesome',
     'colorbox': vendors + '/jquery-colorbox',
+    'custom': '../../css/',
     'dataTables': vendors + '/datatables/media',
     'dataTablesBootstrap3Plugin': vendors + '/datatables-bootstrap3-plugin/media',
     'flag': vendors + '/flag-sprites/dist',
@@ -52,6 +53,7 @@ elixir(function(mix) {
         paths.bootstrap + '/css/bootstrap-theme.css',
         paths.fontawesome + '/css/font-awesome.css',
         paths.bootswatch + '/bootstrap.css',
+        paths.custom + '/styles.css',
         paths.colorbox + '/example3/colorbox.css',
         paths.justifiedGallery + '/css/justifiedGallery.css'
     ], 'public/css/site.css');

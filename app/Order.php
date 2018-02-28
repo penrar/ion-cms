@@ -23,15 +23,15 @@ class Order extends Model
     }
 
     public function product() {
-        return $this->hasOne('App\Product');
+        return $this->belongsTo('App\Product');
     }
 
     public function status() {
-        return $this->hasOne('App\OrderStatus');
+        return $this->belongsTo('App\OrderStatus', 'order_status_id');
     }
 
     public function property() {
-        return $this->hasOne('App\Property');
+        return $this->belongsTo('App\Property');
     }
 
     public function workprocess() {

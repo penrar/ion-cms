@@ -46,7 +46,7 @@ $factory->define(App\ArticleCategory::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Property::class, function (Faker\Generator $faker) {
     return [
-        'address1' => $faker->address,
+        'address1' => $faker->buildingNumber . ' ' . $faker->streetName,
         'address2' => $faker->secondaryAddress,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
@@ -72,7 +72,7 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'phone_number' => $faker->phoneNumber,
-        'address1' => $faker->address,
+        'address1' => $faker->buildingNumber . ' ' . $faker->streetName,
         'address2' => $faker->secondaryAddress,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
@@ -83,7 +83,7 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
 $factory->define(\App\Company::class, function(Faker\Generator $faker){
     return [
         'company_name' => $faker->company,
-        'address1' => $faker->address,
+        'address1' => $faker->buildingNumber . ' ' . $faker->streetName,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
         'zip_code' => $faker->postcode

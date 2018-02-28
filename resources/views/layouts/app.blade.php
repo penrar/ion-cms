@@ -33,7 +33,7 @@
 
 <div class="container">
 @include('notifications')
-    
+
 @yield('content')
 </div>
 

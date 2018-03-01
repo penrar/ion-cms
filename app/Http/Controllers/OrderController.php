@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Order;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -22,11 +25,42 @@ class OrderController extends Controller
     }
 
     public function myOrders(Request $request) {
-
+        $orders = Order::findOrFail($request->user()->id);
     }
     
     public function search(Request $request) {
-        
+        $ordersContacts = Order::query()
+            ->join('customers', 'orders.customer_id', '=', 'customers.id')
+            ->join('contacts', 'contacts.id', '=', 'customers.customerable_id')
+            ->where('customerable_type', '=', 'App\Contact')
+            ->where(function ($query) use ($request) {
+                $query->where('contacts.first_name', 'like', '%'.$request->input('search').'%')
+                    ->orWhere('contacts.last_name', 'like', '%'.$request->input('search').'%');
+            })
+            ->orderBy('contacts.first_name', 'desc')
+            ->get();
+
+        $ordersCompanyContacts = Order::query()
+            ->join('customers', 'orders.customer_id', '=', 'customers.id')
+            ->where('customers.customerable_type', '=', 'App\Company')
+            ->join('companies', 'companies.id', '=', 'customers.customerable_id')
+            ->where(function ($query) use ($request) {
+                $query->where('companies.company_name', 'like', '%'.$request->input('search').'%');
+            })
+            ->orderBy('companies.company_name', 'desc')
+            ->get();
+
+        $orders = $ordersContacts->merge($ordersCompanyContacts);
+        $input = $request->input('search');
+
+        if($orders->count() < 1) {
+            Session::flash('info', 'No orders found!');
+            return view('orders.index', compact('orders', 'input'));
+        } else {
+            return view('orders.index', compact('orders', 'input'));
+        }
+
+
     }
 
     /**

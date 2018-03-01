@@ -1,8 +1,16 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">
-            {{ $order->enterprise_order_number }}
-        </h3>
+        <div class="panel-title">
+
+            <h4>
+                {{ $order->enterprise_order_number }}
+                <div class="pull-right">
+                    <a class="btn btn-info btn-sm"
+                       href="{{ action('OrderController@show', $order->id) }}">View/Update Order</a>
+                </div>
+            </h4>
+
+        </div>
     </div>
 
     <div class="panel-body">
@@ -12,7 +20,6 @@
                     <b>Customer:</b>
                     {{ $order->customer->name }}
                 </div>
-
             </div>
 
             <div class="row row-padding">

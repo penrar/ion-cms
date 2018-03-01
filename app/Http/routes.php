@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'admin'], function() {
         Route::get('orders', 'OrderController@index');
-        Route::get('orders/search', 'OrderController@search');
+        Route::post('orders/search', 'OrderController@search');
         Route::get('orders/{order}', 'OrderController@show');
         Route::get('orders/{order}/edit', 'OrderController@edit');
         Route::post('orders/{order}', 'OrderController@update');

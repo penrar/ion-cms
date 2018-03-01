@@ -13,11 +13,14 @@
             </h3>
         </div>
         <div class="panel-body">
-
+            {!! Form::open(['action' => 'OrderController@search', 'class' => 'form-horizontal']) !!}
+                @include('orders.partials._searchForm')
+            {!! Form::close() !!}
         </div>
     </div>
 
     @foreach($orders as $order)
         @include('orders.partials._card')
     @endforeach
+
 @endsection

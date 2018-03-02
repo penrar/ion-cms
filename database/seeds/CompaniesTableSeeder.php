@@ -13,7 +13,7 @@ class CompaniesTableSeeder extends Seeder
 
     public function run()
     {
-        $contacts = \App\Contact::all()->random(15);
+        $contacts = \App\Contact::all()->random(20);
 
         foreach($contacts as $contact) {
             $contact->company()->save(factory(Company::class)->make());

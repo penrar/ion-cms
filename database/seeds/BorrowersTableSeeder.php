@@ -11,7 +11,7 @@ class BorrowersTableSeeder extends Seeder
      */
     public function run()
     {
-        $contacts = \App\Contact::all()->random(20);
+        $contacts = \App\Contact::all()->random(10);
 
         foreach($contacts as $contact) {
             $contact->borrower()->save(new \App\Borrower());

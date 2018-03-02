@@ -29,6 +29,7 @@ class OrderController extends Controller
     }
     
     public function search(Request $request) {
+        $request->session()->forget('info');
         $ordersContacts = Order::query()
             ->join('customers', 'orders.customer_id', '=', 'customers.id')
             ->join('contacts', 'contacts.id', '=', 'customers.customerable_id')

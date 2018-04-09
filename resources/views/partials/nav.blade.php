@@ -45,7 +45,7 @@
                                     class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu" role="menu">
                             @if(Auth::check())
-                                @if(Auth::user()->admin==1)
+                                @if(Auth::user()->role->code == 'admin')
                                     <li>
                                         <a href="{{ url('admin/dashboard') }}"><i class="fa fa-tachometer"></i> Admin Dashboard</a>
                                     </li>

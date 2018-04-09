@@ -14,8 +14,12 @@ Route::bind('order', function($value, $route) {
     return \App\Order::whereId($value)->firstOrFail();
 });
 
-Route::bind('customer', function($value, $route) {
-    return \App\Customer::whereId($value)->firstOrFail();
+Route::bind('property', function($value, $route) {
+    return \App\Property::whereId($value)->firstOrFail();
+});
+
+Route::bind('company', function($value, $route) {
+    return \App\Company::whereId($value)->firstOrFail();
 });
 
 /**
@@ -37,6 +41,15 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('orders/{order}', 'OrderController@show');
         Route::get('orders/{order}/edit', 'OrderController@edit');
         Route::post('orders/{order}', 'OrderController@update');
+        // contact
+        Route::get('order/{order}/contacts/{contact}/edit', 'ContactController@edit');
+        Route::post('order/{order}/contacts/{contact}', 'ContactController@update');
+        // company
+        Route::get('order/{order}/company/{contact}/edit', 'CompanyController@edit');
+        Route::post('order/{order}/company/{contact}', 'CompanyController@update');
+        // property
+        Route::get('order/{order}/property/{property}/edit', 'PropertyController@edit');
+        Route::post('order/{order}/property/{property}', 'PropertyController@update');
     });
 });
 

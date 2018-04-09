@@ -36,20 +36,20 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['middleware' => 'admin'], function() {
-        Route::get('orders', 'OrderController@index');
-        Route::post('orders/search', 'OrderController@search');
-        Route::get('orders/{order}', 'OrderController@show');
-        Route::get('orders/{order}/edit', 'OrderController@edit');
-        Route::post('orders/{order}', 'OrderController@update');
+        Route::get('orders', 'OrderController@index')->name('order.index');
+        Route::post('orders/search', 'OrderController@search')->name('order.search');
+        Route::get('orders/{order}', 'OrderController@show')->name('order.show');
+        Route::get('orders/{order}/edit', 'OrderController@edit')->name('order.edit');
+        Route::post('orders/{order}', 'OrderController@update')->name('order.update');
         // contact
-        Route::get('order/{order}/contacts/{contact}/edit', 'ContactController@edit');
-        Route::post('order/{order}/contacts/{contact}', 'ContactController@update');
+        Route::get('order/{order}/contacts/{contact}/edit', 'ContactController@edit')->name('contact.edit');
+        Route::post('order/{order}/contacts/{contact}', 'ContactController@update')->name('contact.update');
         // company
-        Route::get('order/{order}/company/{contact}/edit', 'CompanyController@edit');
-        Route::post('order/{order}/company/{contact}', 'CompanyController@update');
+        Route::get('order/{order}/company/{contact}/edit', 'CompanyController@edit')->name('company.edit');
+        Route::post('order/{order}/company/{contact}', 'CompanyController@update')->name('company.update');
         // property
-        Route::get('order/{order}/property/{property}/edit', 'PropertyController@edit');
-        Route::post('order/{order}/property/{property}', 'PropertyController@update');
+        Route::get('order/{order}/property/{property}/edit', 'PropertyController@edit')->name('property.edit');
+        Route::post('order/{order}/property/{property}', 'PropertyController@update')->name('property.update');
     });
 });
 
@@ -78,36 +78,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 
     # Admin Dashboard
     Route::get('dashboard', 'Admin\DashboardController@index');
-
-    # Article category
-//    Route::get('articlecategory/data', 'Admin\ArticleCategoriesController@data');
-//    Route::get('articlecategory/{articlecategory}/show', 'Admin\ArticleCategoriesController@show');
-//    Route::get('articlecategory/{articlecategory}/edit', 'Admin\ArticleCategoriesController@edit');
-//    Route::get('articlecategory/{articlecategory}/delete', 'Admin\ArticleCategoriesController@delete');
-//    Route::get('articlecategory/reorder', 'ArticleCategoriesController@getReorder');
-//    Route::resource('articlecategory', 'Admin\ArticleCategoriesController');
-//
-//    # Articles
-//    Route::get('article/data', 'Admin\ArticleController@data');
-//    Route::get('article/{article}/show', 'Admin\ArticleController@show');
-//    Route::get('article/{article}/edit', 'Admin\ArticleController@edit');
-//    Route::get('article/{article}/delete', 'Admin\ArticleController@delete');
-//    Route::get('article/reorder', 'Admin\ArticleController@getReorder');
-//    Route::resource('article', 'Admin\ArticleController');
-//
-//    # Photo Album
-//    Route::get('photoalbum/data', 'Admin\PhotoAlbumController@data');
-//    Route::get('photoalbum/{photoalbum}/show', 'Admin\PhotoAlbumController@show');
-//    Route::get('photoalbum/{photoalbum}/edit', 'Admin\PhotoAlbumController@edit');
-//    Route::get('photoalbum/{photoalbum}/delete', 'Admin\PhotoAlbumController@delete');
-//    Route::resource('photoalbum', 'Admin\PhotoAlbumController');
-//
-//    # Photo
-//    Route::get('photo/data', 'Admin\PhotoController@data');
-//    Route::get('photo/{photo}/show', 'Admin\PhotoController@show');
-//    Route::get('photo/{photo}/edit', 'Admin\PhotoController@edit');
-//    Route::get('photo/{photo}/delete', 'Admin\PhotoController@delete');
-//    Route::resource('photo', 'Admin\PhotoController');
 
     # Users
     Route::get('user/data', 'Admin\UserController@data');

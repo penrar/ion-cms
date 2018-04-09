@@ -6,6 +6,7 @@ class UserTableSeeder extends Seeder {
 
 	public function run()
 	{
+        factory(\App\User::class, 20)->create();
 
 		\App\User::create([
 			'name' => 'Admin User',
@@ -22,11 +23,6 @@ class UserTableSeeder extends Seeder {
 			'password' => bcrypt('user'),
             'role_id' => 2,
 		]);
-
-		factory(\App\User::class, 20)->create();
-
-
-
     }
 
 }

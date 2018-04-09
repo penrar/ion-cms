@@ -23,6 +23,14 @@ class UserTableSeeder extends Seeder {
 			'password' => bcrypt('user'),
             'role_id' => 2,
 		]);
+
+        \App\User::create([
+            'name' => 'Customer User',
+            'username' => 'customer_user',
+            'email' => 'customer@user.com',
+            'password' => bcrypt('user'),
+            'role_id' => 3,
+        ]);
     }
 
 }

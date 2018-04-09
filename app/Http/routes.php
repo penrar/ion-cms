@@ -40,16 +40,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('orders/search', 'OrderController@search')->name('order.search');
         Route::get('orders/{order}', 'OrderController@show')->name('order.show');
         Route::get('orders/{order}/edit', 'OrderController@edit')->name('order.edit');
-        Route::post('orders/{order}', 'OrderController@update')->name('order.update');
+        Route::patch('orders/{order}', 'OrderController@update')->name('order.update');
         // contact
         Route::get('order/{order}/contacts/{contact}/edit', 'ContactController@edit')->name('contact.edit');
-        Route::post('order/{order}/contacts/{contact}', 'ContactController@update')->name('contact.update');
+        Route::patch('order/{order}/contacts/{contact}', 'ContactController@update')->name('contact.update');
         // company
         Route::get('order/{order}/company/{contact}/edit', 'CompanyController@edit')->name('company.edit');
-        Route::post('order/{order}/company/{contact}', 'CompanyController@update')->name('company.update');
+        Route::patch('order/{order}/company/{contact}', 'CompanyController@update')->name('company.update');
         // property
         Route::get('order/{order}/property/{property}/edit', 'PropertyController@edit')->name('property.edit');
-        Route::post('order/{order}/property/{property}', 'PropertyController@update')->name('property.update');
+        Route::patch('order/{order}/property/{property}', 'PropertyController@update')->name('property.update');
     });
 });
 

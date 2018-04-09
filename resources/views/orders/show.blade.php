@@ -8,15 +8,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">
-
-                <h4>
-                    {{ $order->enterprise_order_number }}
-                    <div class="pull-right">
-                        <a class="btn btn-info btn-sm"
-                           href="{{ action('OrderController@show', $order->id) }}">View/Update Order</a>
-                    </div>
-                </h4>
-
+                <span style="font-size: 1.3em;">{{ $order->enterprise_order_number }}</span>
             </div>
         </div>
 
@@ -43,9 +35,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">
+                                Property Information
                                 <div class="pull-right">
-                                    <a class="btn btn-info btn-sm"
-                                       href="{{ action('PropertyController@edit', [$order->id, $order->property->id]) }}">Update Property</a>
+                                    <a class="btn btn-info btn-xs"
+                                       href="{{ action('PropertyController@edit', [$order->id, $order->property->id]) }}">Update</a>
                                 </div>
                             </div>
                         </div>

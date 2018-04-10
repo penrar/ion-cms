@@ -26,6 +26,7 @@ class OrderController extends Controller
 
     public function myOrders(Request $request) {
         $orders = Order::findOrFail($request->user()->id);
+        dd($orders);
     }
 
     /**
@@ -37,35 +38,53 @@ class OrderController extends Controller
         // forget any messages from past searches
         $request->session()->forget('info');
 
-        // get the orders with customers who are contacts
-        $ordersContacts = Order::query()
-            ->join('customers', 'orders.customer_id', '=', 'customers.id')
-            ->join('contacts', 'contacts.id', '=', 'customers.customerable_id')
-            ->where('customerable_type', '=', 'App\Contact')
-            ->where(function ($query) use ($request) {
-                $query->where('contacts.first_name', 'like', '%'.$request->input('search').'%')
-                    ->orWhere('contacts.last_name', 'like', '%'.$request->input('search').'%');
-            })
-            ->orderBy('contacts.first_name', 'desc')
-            ->get();
+        // we want to search contacts
+        if($request->input('searchType') == 'contact') {
+            $orders = Order::query()
+                ->join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->join('contacts', 'contacts.id', '=', 'customers.customerable_id')
+                ->join('properties', 'orders.property_id', '=', 'properties.id')
+                ->whereHas('customer', function($q) {
+                    $q->where('customerable_type', '=', 'App\Contact');
+                })
+                ->where(function ($query) use ($request) {
+                    $query->where('contacts.first_name', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('contacts.last_name', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.zip_code', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
+                })
+                ->orderBy('contacts.first_name',  $request->input('searchDirection'))
+                ->get();
+        } else { // we want to search companies
+            $orders = Order::query()
+                ->join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->whereHas('customer', function($q) {
+                    $q->where('customerable_type', '=', 'App\Company');
+                })
+                ->join('companies', 'companies.id', '=', 'customers.customerable_id')
+                ->join('properties', 'orders.property_id', '=', 'properties.id')
+                ->where(function ($query) use ($request) {
+                    $query->where('companies.company_name', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.zip_code', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
+                })
+                ->orderBy('companies.company_name', $request->input('searchDirection'))
+                ->get();
+        }
 
-        // get the orders with customers who are companies
-        $ordersCompanyContacts = Order::query()
-            ->join('customers', 'orders.customer_id', '=', 'customers.id')
-            ->where('customers.customerable_type', '=', 'App\Company')
-            ->join('companies', 'companies.id', '=', 'customers.customerable_id')
-            ->where(function ($query) use ($request) {
-                $query->where('companies.company_name', 'like', '%'.$request->input('search').'%');
-            })
-            ->orderBy('companies.company_name', 'desc')
-            ->get();
-
-        // TODO: Add some way to sort them at the user's discretion
-        // but just merge them for now
-        $orders = $ordersContacts->merge($ordersCompanyContacts);
-
-        // get the search query to pass back into the view
-        $input = $request->input('search');
+        $input = [
+            'search' => $request->input('search'),
+            'direction' => $request->input('searchDirection'),
+            'type' => $request->input('searchType')
+        ];
 
         if($orders->count() < 1) {
             // no orders found, let the user know

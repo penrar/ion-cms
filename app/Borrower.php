@@ -10,6 +10,7 @@ class Borrower extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $morphClass = 'Borrower';
 
     public function orders() {
         return $this->belongsToMany('App\Order', 'borrower_order');

@@ -59,30 +59,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row row-padding">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                Borrowers
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Borrowers</th>
-                                </tr>
-                                @foreach($order->borrowers as $borrower)
-                                    <tr>
-                                        <td>{{ $borrower->name }}</td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div> <!-- ./col-lg-12 -->
     </div> <!-- ./panel-body -->
 </div ><!-- ./panel -->

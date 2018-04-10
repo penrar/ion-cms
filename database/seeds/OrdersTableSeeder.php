@@ -7,6 +7,7 @@ use App\Customer;
 use App\Property;
 use App\Product;
 use App\Order;
+use App\Contact;
 
 class OrdersTableSeeder extends Seeder
 {
@@ -22,6 +23,29 @@ class OrdersTableSeeder extends Seeder
         $properties = Property::all();
         $productsCount = Product::all()->count();
         $faker = Faker\Factory::create();
+
+//        $customerUser = Customer::where('first_name', '=', 'Customer')
+//            ->join('contacts', 'contacts.id',  '=', 'customers.customerable_id')
+//            ->where('customers.customerable_type', '=', 'App\Contact')
+//            ->first();
+
+//        $customerUser->order()->save(new Order([
+//            'product_id' => rand(1, $productsCount),
+//            'property_id' => rand(1, $properties->random(1)->id),
+//            'order_status_id' => rand(1, $orderStatusCount),
+//            'enterprise_order_number' => 'EOR' . rand(2017,2018) . rand(1,12) . rand(1, 28) . '-' . rand(10000, 99999),
+//            'sla_date' => $faker->dateTimeBetween('-30 days', '+30 days')->format('Y-m-d H:i:s')
+//        ]));
+
+//        Order::create([
+//            'customer_id' => $customerUser->id,
+//            'product_id' => rand(1, $productsCount),
+//            'property_id' => rand(1, $properties->random(1)->id),
+//            'order_status_id' => rand(1, $orderStatusCount),
+//            'enterprise_order_number' => 'EOR' . rand(2017,2018) . rand(1,12) . rand(1, 28) . '-' . rand(10000, 99999),
+//            'sla_date' => $faker->dateTimeBetween('-30 days', '+30 days')->format('Y-m-d H:i:s')
+//        ]);
+
 
         // associate orders with a customer
         foreach ($customers as $customer) {
@@ -39,6 +63,7 @@ class OrdersTableSeeder extends Seeder
         $borrowers = Borrower::all();
 
         foreach ($orders as $order) {
+            $order->borrowers()->save($borrowers->random(1));
             $order->borrowers()->save($borrowers->random(1));
         }
     }

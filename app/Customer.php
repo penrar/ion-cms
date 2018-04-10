@@ -10,7 +10,7 @@ class Customer extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-
+    protected $morphClass = 'Customer';
     protected $table = 'customers';
 
     public function customerable() {

@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')
-    <h3>Orders</h3>
+    <div class="row">
+        <div class="page-header">
+            <h2>Orders</h2>
+        </div>
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">

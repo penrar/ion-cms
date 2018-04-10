@@ -16,13 +16,16 @@ class Permission
      */
     public function handle($request, Closure $next, $type, $value)
     {
-        // based on the variable assigned to the middleware, evaluate if the user has permission to use the resource
-        // type is permission or role
-        if ($type == 'atLeast') {
+        //Admins can go anywhere
+        if(Role::hasRole($request->user()->role->code, 'admin')) {
+            return $next($request);
+        }
+
+        if ($type == 'atLeast') { // at least any role level
             if (!Role::atLeast($request->user(), $value)) {
                 return redirect()->route('401')->with('error', 'You do not have permission to access this resource');
             }
-        } elseif ($type == 'hasRole') {
+        } elseif ($type == 'hasRole') { // has any role code
             if (!Role::hasRole($request->user(), $value)) {
                 return redirect('/home')->with('error', 'You do not have permission to access that resource');
             }

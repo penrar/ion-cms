@@ -30,9 +30,9 @@ class PropertyController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order, Property $property)
+    public function update(Request $request, Order $order)
     {
-        $property->update($request->all());
+        $order-property()->update($request->all());
         return redirect()->route('order.show', [$order->id])->with('success', 'Property updated!');
     }
 }

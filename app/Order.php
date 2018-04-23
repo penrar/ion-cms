@@ -26,6 +26,10 @@ class Order extends Model
         return $this->belongsTo('App\Product');
     }
 
+    public function actions() {
+        return $this->hasMany('App\Action');
+    }
+
     public function status() {
         return $this->belongsTo('App\OrderStatus', 'order_status_id');
     }

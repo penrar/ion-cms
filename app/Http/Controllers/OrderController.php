@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Action;
+use App\OrderStatus;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +12,7 @@ use App\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
 
 class OrderController extends Controller
 {
@@ -115,7 +118,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $orderStatuses = OrderStatus::lists('status_name', 'id');
+        return view('orders.edit', compact('order', 'orderStatuses'));
     }
 
     /**
@@ -127,6 +131,13 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->actions()->save(
+            new Action([
+                'user_id' => $request->user()->id,
+                'action_type_id' => $request->input('orderStatus'),
+                'notes' => $request->input('notes')
+            ]));
+
+        return redirect()->route('order.show', [$order->id])->with('success', 'Order updated!');
     }
 }

@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Admin User created with username admin@admin.com and password admin');
         $this->command->info('Test User created with username user@user.com and password user');
         $this->command->info('Customer User created with username customer@user.com and password user');
-//		$this->call(LanguageTableSeeder::class);
 		$this->call(CustomersTableSeeder::class);
 		$this->call(BorrowersTableSeeder::class);
 		$this->call(OrderStatusTableSeeder::class);
 		$this->call(ProductsTableSeeder::class);
+		$this->call(ActionTypesSeeder::class);
 		$this->call(OrdersTableSeeder::class);
         Model::reguard();
     }

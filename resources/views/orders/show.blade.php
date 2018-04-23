@@ -9,6 +9,12 @@
         <div class="panel-heading">
             <div class="panel-title">
                 <span style="font-size: 1.3em;">{{ $order->enterprise_order_number }}</span>
+                <div class="pull-right">
+                    <a  href="{{ action('OrderController@edit', ['order' => $order->id]) }}"
+                        class="btn btn-sm btn-info">
+                        Update Order Status
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -71,6 +77,29 @@
                         <b>Borrowers:</b>
                         @foreach($order->borrowers as $borrower)
                             {{ $borrower->name }} <br>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Actions
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @foreach($order->actions as $action)
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    {{ $action->user->name }}
+                                </div>
+                                <div class="col-lg-2">
+                                    {{ $action->type->action_name}}
+                                </div>
+                                <div class="col-lg-8">
+                                    {{ $action->note }}
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>

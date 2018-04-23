@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Order;
 use App\PhotoAlbum;
 use DB;
 
@@ -15,7 +16,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('pages.home');
+	    $orderCount = Order::all()->count();
+		return view('pages.home', compact('orderCount'));
 	}
 
 }

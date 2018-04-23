@@ -16,6 +16,7 @@ class CreateActionTypesTable extends Migration
             $table->increments('id');
             $table->string('action_code');
             $table->string('action_name');
+            $table->timestamps();
         });
     }
 

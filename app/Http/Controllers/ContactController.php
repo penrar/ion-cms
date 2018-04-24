@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Contact;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -66,7 +68,8 @@ class ContactController extends Controller
         if($customerable instanceof Contact) {
             $contact = $customerable;
         } else if($customerable instanceof Company) {
-            $contact = $customerable->contact;
+            $contact = $customerable;
+            return view('companies.edit', compact('order', 'contact'));
         } else {
             throw new \Error('Invalid Customerable Model');
         }
@@ -81,9 +84,19 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Requests\ContactRequest $request, Order $order)
     {
-        //
+        // it's gonna be a company or contact
+        $customerable = $order->customer->customerable;
+
+        if($customerable instanceof Contact) {
+            $contact = $customerable;
+        } else if($customerable instanceof Company) {
+            $contact = $customerable;
+            return view('companies.edit', compact('order', 'contact'));
+        } else {
+            throw new \Error('Invalid Customerable Model');
+        }
     }
 
     /**

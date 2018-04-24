@@ -9,6 +9,12 @@
         <div class="panel-heading">
             <div class="panel-heading">
                 <span style="font-size: 1.3em;">{{ $order->enterprise_order_number }}</span>
+                <span class="pull-right">
+                    <a href="{{ action('OrderController@show', [$order->id]) }}"
+                       class="btn btn-info"  >
+                        Return to the order
+                    </a>
+                </span>
             </div>
         </div>
         <div class="panel-body">
@@ -31,36 +37,35 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    Property Information
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Property Information
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <b>Address:</b> {{ $order->property->address }}
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <b>Address:</b> {{ $order->property->address }}
-                                    </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <b>City:</b> {{ $order->property->city }}
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <b>City:</b> {{ $order->property->city }}
-                                    </div>
+                                <div class="col-lg-1">
+                                    <b>State:</b> {{ $order->property->state }}
+                                </div>
 
-                                    <div class="col-lg-1">
-                                        <b>State:</b> {{ $order->property->state }}
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <b>ZIP:</b> {{ $order->property->zip_code }}
-                                    </div>
+                                <div class="col-lg-2">
+                                    <b>ZIP:</b> {{ $order->property->zip_code }}
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- /property panel -->
+                    </div>
+
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -83,9 +88,9 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
+                    <div class="col-lg-12">
                         {!! Form::model($order, ['method' => 'PATCH', 'action' => ['OrderController@update', $order->id]]) !!}
-                            @include('orders.partials._form')
+                        @include('orders.partials._form')
                         {!! Form::close() !!}
                     </div>
                 </div> <!-- /customer info panel -->

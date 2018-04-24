@@ -9,6 +9,6 @@ class ActionType extends Model
     protected $guarded = ['id'];
 
     public function actions() {
-        return $this->belongsToMany('App\Action');
+        return $this->hasMany('App\Action');
     }
 }

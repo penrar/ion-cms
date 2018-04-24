@@ -129,7 +129,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Requests\OrderEditRequest $request, Order $order)
     {
         $order->actions()->save(
             new Action([

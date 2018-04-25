@@ -18,7 +18,7 @@
     {!! Form::text('city', null, ['class' => 'form-control']) !!}
     @if($errors->has('city'))
         <div class="alert alert-danger">
-            Please enter a note!
+            Please enter a city!
         </div>
     @endif
 </div>

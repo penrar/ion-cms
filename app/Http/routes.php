@@ -32,7 +32,7 @@ Route::get('errors/401', ['as' => '401', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'permission:hasRole,customer'], function() {
-        Route::get('orders/mine', 'OrderController@myOrders');
+        Route::get('orders/my-orders', 'OrderController@myOrders');
     });
 
     Route::group(['middleware' => 'permission:atLeast,30'], function() {

@@ -1,7 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Eric
- * Date: 4/24/2018
- * Time: 1:45 PM
- */
+@extends('layouts.app')
+
+@section('content')
+    <div class="col-lg-6">
+        {!! Form::model($contact) !!}
+    </div>
+@endsection

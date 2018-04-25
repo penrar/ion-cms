@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{-- Web site Title --}}
+
 @section('title')
     Orders :: @parent
 @endsection

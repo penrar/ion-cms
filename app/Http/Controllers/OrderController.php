@@ -53,6 +53,7 @@ class OrderController extends Controller
                 ->where(function ($query) use ($request) {
                     $query->where('contacts.first_name', 'like', '%'.$request->input('search').'%')
                         ->orWhere('contacts.last_name', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('orders.enterprise_order_number', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
@@ -73,6 +74,7 @@ class OrderController extends Controller
                 ->where(function ($query) use ($request) {
                     $query->where('companies.company_name', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
+                        ->orWhere('orders.enterprise_order_number', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.zip_code', 'like', '%'.$request->input('search').'%')

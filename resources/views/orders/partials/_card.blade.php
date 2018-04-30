@@ -15,16 +15,29 @@
                     </div>
                 @endif
             </h4>
-
         </div>
     </div>
+
+    {{ $order }}
 
     <div class="panel-body">
         <div class="col-lg-12">
             <div class="row row-padding">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <b>Customer:</b>
-                    {{ $order->customer->name }}
+                    {{ $order->customer->name }}<br>
+                    @if($order->customer->isCompany())
+                        (Company contact for {{ $order->customer->customerable->company_name }})
+                    @endif
+                </div>
+                <div class="col-lg-3">
+                    <b>Phone:</b>
+                    @if($order->customer->isCompany())
+                        {{ $order->customer->customerable->contact->phone_number }} <br>
+                        (Company phone: {{ $order->customer->customerable->phone_number }})
+                    @else
+                        {{ $order->customer->customerable->phone_number }}
+                    @endif
                 </div>
             </div>
 

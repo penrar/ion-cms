@@ -41,4 +41,8 @@ class Order extends Model
     public function workprocess() {
         return $this->belongsToMany('App\WorkProcess', 'order_work_process');
     }
+
+    public function getCustomerableAttribute() {
+        return $this->customer->customerable;
+    }
 }

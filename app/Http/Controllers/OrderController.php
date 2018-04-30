@@ -44,6 +44,7 @@ class OrderController extends Controller
         // we want to search contacts
         if($request->input('searchType') == 'contact') {
             $orders = Order::query()
+                ->select('orders.*')
                 ->join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->join('contacts', 'contacts.id', '=', 'customers.customerable_id')
                 ->join('properties', 'orders.property_id', '=', 'properties.id')
@@ -65,6 +66,7 @@ class OrderController extends Controller
                 ->get();
         } else { // we want to search companies
             $orders = Order::query()
+                ->select('orders.*')
                 ->join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->whereHas('customer', function($q) {
                     $q->where('customerable_type', '=', 'App\Company');

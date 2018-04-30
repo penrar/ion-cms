@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
+use App\Order;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -57,9 +59,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        //
+
     }
 
     /**
@@ -69,9 +71,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        //
+        $customer = Customer::findOrFail($order->customer->id);
+        $customer->customerable()->update($request->all());
+        return redirect()->route('order.show', [$order->id])->with('success', 'Company updated!');
     }
 
     /**

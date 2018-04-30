@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Contact;
+use App\Customer;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -13,48 +14,6 @@ use App\Http\Controllers\Controller;
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -62,6 +21,7 @@ class ContactController extends Controller
      */
     public function edit(Order $order)
     {
+
         $customerable = $order->customer->customerable;
         $contact = null;
 
@@ -86,17 +46,9 @@ class ContactController extends Controller
      */
     public function update(Requests\ContactRequest $request, Order $order)
     {
-        // it's gonna be a company or contact
-        $customerable = $order->customer->customerable;
-
-        if($customerable instanceof Contact) {
-            $contact = $customerable;
-        } else if($customerable instanceof Company) {
-            $contact = $customerable;
-            return view('companies.edit', compact('order', 'contact'));
-        } else {
-            throw new \Error('Invalid Customerable Model');
-        }
+        $customer = Customer::findOrFail($order->customer->id);
+        $customer->customerable()->update($request->all());
+        return redirect()->route('order.show', [$order->id])->with('success', 'Contact updated!');
     }
 
     /**

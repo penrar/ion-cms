@@ -84,6 +84,7 @@ $factory->define(\App\Company::class, function(Faker\Generator $faker){
     return [
         'company_name' => $faker->company,
         'address1' => $faker->buildingNumber . ' ' . $faker->streetName,
+        'phone_number' => $faker->phoneNumber,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
         'zip_code' => $faker->postcode

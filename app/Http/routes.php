@@ -31,14 +31,17 @@ Route::get('errors/401', ['as' => '401', function () {
 
 
 Route::group(['middleware' => 'auth'], function() {
+
     Route::group(['middleware' => 'permission:hasRole,customer'], function() {
         Route::get('orders/my-orders', 'OrderController@myOrders');
     });
 
+    Route::get('orders/{order}', 'OrderController@show')->name('order.show');
+
     Route::group(['middleware' => 'permission:atLeast,30'], function() {
         Route::get('orders', 'OrderController@index')->name('order.index');
         Route::post('orders/search', 'OrderController@search')->name('order.search');
-        Route::get('orders/{order}', 'OrderController@show')->name('order.show');
+
         Route::get('orders/{order}/edit', 'OrderController@edit')->name('order.edit');
         Route::patch('orders/{order}', 'OrderController@update')->name('order.update');
         // contact

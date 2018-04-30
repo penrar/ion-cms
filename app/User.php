@@ -35,4 +35,8 @@ class User extends Model implements AuthenticatableContract,
     public function actions() {
         return $this->hasMany('App\Action');
     }
+
+    public function canEdit() {
+        return $this->role->code == 'admin' || $this->role->code == 'rep';
+    }
 }

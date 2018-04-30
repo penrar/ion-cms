@@ -28,8 +28,8 @@ class OrderController extends Controller
     }
 
     public function myOrders(Request $request) {
-        $orders = Order::findOrFail($request->user()->id);
-        dd($orders);
+        $orders = Order::where('customer_id', '=', $request->user()->contact->customer->id)->get();
+        return view('orders.my-orders', compact('orders'));
     }
 
     /**

@@ -50,12 +50,18 @@
                             <div class="panel-title">
                                 Customer Information
                                 @if(Auth::user()->canEdit())
-                                <span class="pull-right">
-                                    <a href="{{ action('ContactController@edit', ['order' => $order->id])}}"
-                                       class="btn btn-xs btn-info">
-                                        Update Contact Information
-                                    </a>
-                                </span>
+                                    <span class="pull-right">
+                                        <a href="{{ action('ContactController@edit', ['order' => $order->id])}}"
+                                           class="btn btn-xs btn-info">
+                                            Update Contact Information
+                                        </a>
+                                        @if($order->customer->isCompany())
+                                            <a href="{{ action('CompanyController@edit', ['order' => $order->id])}}"
+                                               class="btn btn-xs btn-info">
+                                            Update Company Information
+                                        </a>
+                                        @endif
+                                    </span>
                                 @endif
                             </div>
                         </div>

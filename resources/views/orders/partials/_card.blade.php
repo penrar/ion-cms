@@ -18,8 +18,6 @@
         </div>
     </div>
 
-    {{ $order }}
-
     <div class="panel-body">
         <div class="col-lg-12">
             <div class="row row-padding">

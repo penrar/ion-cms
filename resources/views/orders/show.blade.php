@@ -39,6 +39,10 @@
                                 <div class="col-lg-3">
                                     <b>Order Status:</b> {{ $order->status->status }}
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <b>SLA:</b> {{ $order->sla_date }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -154,7 +158,7 @@
                         </div>
                         <div class="panel-body">
                             @if($order->actions->count() > 0)
-                                @foreach($order->actions as $action)
+                                @foreach($order->actions->sortByDesc('created_at') as $action)
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             {{ date('M-d-Y h:i:s A', strtotime($action->created_at)) }}

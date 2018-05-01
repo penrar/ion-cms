@@ -23,11 +23,12 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('sla_date', 'asc')->get();
         return view('orders.index', compact('orders'));
     }
 
     public function myOrders(Request $request) {
+//        dd($request->user()->contact->customer);
         $orders = Order::where('customer_id', '=', $request->user()->contact->customer->id)->get();
         return view('orders.my-orders', compact('orders'));
     }
@@ -62,7 +63,7 @@ class OrderController extends Controller
                         ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
                 })
-                ->orderBy('contacts.first_name',  $request->input('searchDirection'))
+                ->orderBy('orders.sla_date',  $request->input('searchDirection'))
                 ->get();
         } else { // we want to search companies
             $orders = Order::query()
@@ -83,7 +84,7 @@ class OrderController extends Controller
                         ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
                         ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
                 })
-                ->orderBy('companies.company_name', $request->input('searchDirection'))
+                ->orderBy('orders.sla_date', $request->input('searchDirection'))
                 ->get();
         }
 

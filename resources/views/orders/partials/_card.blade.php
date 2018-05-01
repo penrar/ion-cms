@@ -47,6 +47,10 @@
                 <div class="col-lg-3">
                     <b>Order Status:</b> {{ $order->status->status }}
                 </div>
+
+                <div class="col-lg-3">
+                    <b>SLA:</b> {{ $order->sla_date }}
+                </div>
             </div>
 
 

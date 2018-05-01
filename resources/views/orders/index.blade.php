@@ -23,8 +23,17 @@
         </div>
     </div>
 
-    @foreach($orders as $order)
-        @include('orders.partials._card')
-    @endforeach
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {{ $orders->count() }} Orders Found
+            </div>
+        </div>
 
+        <div class="panel-body">
+            @foreach($orders as $order)
+                @include('orders.partials._card')
+            @endforeach
+        </div>
+    </div>
 @endsection

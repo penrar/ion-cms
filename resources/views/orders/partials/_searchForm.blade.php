@@ -27,7 +27,7 @@
     <div class="form-group">
         {!!
             Form::select('searchDirection',
-                ['desc' => 'Descending', 'asc' => 'Ascending'],
+                ['desc' => 'SLA Descending', 'asc' => 'SLA Ascending'],
                 isset($input['direction']) ? $input['direction'] : 'desc',
                 ['class' => 'form-control'])
         !!}

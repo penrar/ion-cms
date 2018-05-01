@@ -14,7 +14,7 @@ class CustomersTableSeeder extends Seeder
         $customer_user = \App\Contact::where('first_name', '=', 'Customer')->first();
         $customer_user->customer()->save(new \App\Customer());
 
-        $contacts = \App\Contact::all()->random(30);
+        $contacts = \App\Contact::where('last_name', '<>', 'User')->get();
 
         foreach($contacts as $contact) {
             $contact->customer()->save(new \App\Customer());

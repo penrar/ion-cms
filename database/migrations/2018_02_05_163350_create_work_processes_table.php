@@ -15,10 +15,11 @@ class CreateWorkProcessesTable extends Migration
         Schema::create('work_processes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('work_process_type');
+            $table->double('price');
             $table->timestamps();
         });
 
-        Schema::create('order_work_processes', function (Blueprint $table) {
+        Schema::create('order_work_process', function (Blueprint $table) {
             $table->unsignedInteger('work_process_id');
             $table->foreign('work_process_id')->references('id')->on('work_processes');
             $table->unsignedInteger('order_id');

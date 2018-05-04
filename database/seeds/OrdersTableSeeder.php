@@ -1,6 +1,7 @@
 <?php
 
 use App\Action;
+use App\WorkProcess;
 use Illuminate\Database\Seeder;
 use App\OrderStatus;
 use App\Borrower;
@@ -102,6 +103,19 @@ class OrdersTableSeeder extends Seeder
                     ])
                 );
             }
+        }
+
+        // make work processes
+
+        $orders = Order::all();
+
+        foreach($orders as $order) {
+            $order->workprocess()->attach(1);
+            $order->workprocess()->attach(2);
+            $order->workprocess()->attach(3);
+            $order->workprocess()->attach(4);
+            $order->workprocess()->attach(5);
+            $order->workprocess()->attach(6);
         }
     }
 }

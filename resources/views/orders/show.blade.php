@@ -10,12 +10,12 @@
             <div class="panel-title">
                 <span style="font-size: 1.3em;">{{ $order->enterprise_order_number }}</span>
                 @if(Auth::user()->canEdit())
-                <div class="pull-right">
-                    <a  href="{{ action('OrderController@edit', ['order' => $order->id]) }}"
-                        class="btn btn-sm btn-info">
-                        Update Order Status
-                    </a>
-                </div>
+                    <div class="pull-right">
+                        <a  href="{{ action('OrderController@edit', ['order' => $order->id]) }}"
+                            class="btn btn-sm btn-info">
+                            Update Order Status
+                        </a>
+                    </div>
                 @endif
             </div>
         </div>
@@ -44,7 +44,41 @@
                                     <b>SLA:</b> {{ $order->sla_date }}
                                 </div>
                             </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Work Process
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Work Process</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach($order->workProcess as $workProcess)
+                                                <tr>
+                                                    <td>{{ $workProcess->work_process_type }}</td>
+                                                    <td>{{ money_format("$%i",$workProcess->price) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <td>Total: {{ money_format("$%i",$order->orderTotal()) }}</td><td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -98,10 +132,10 @@
                             <div class="panel-title">
                                 Property Information
                                 @if(Auth::user()->canEdit())
-                                <div class="pull-right">
-                                    <a class="btn btn-info btn-xs"
-                                       href="{{ action('PropertyController@edit', [$order->id, $order->property->id]) }}">Update Property Information</a>
-                                </div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-info btn-xs"
+                                           href="{{ action('PropertyController@edit', [$order->id, $order->property->id]) }}">Update Property Information</a>
+                                    </div>
                                 @endif
                             </div>
                         </div>

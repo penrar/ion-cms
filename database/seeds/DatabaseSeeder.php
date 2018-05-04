@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactUserTableSeeder::class);
         $this->call(PropertiesTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
+        $this->call(WorkProcessSeeder::class);
         $this->command->info('Admin User created with username admin@admin.com and password admin');
         $this->command->info('Test User created with username user@user.com and password user');
         $this->command->info('Customer User created with username customer@user.com and password user');

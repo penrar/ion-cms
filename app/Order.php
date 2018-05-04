@@ -45,4 +45,14 @@ class Order extends Model
     public function getCustomerableAttribute() {
         return $this->customer->customerable;
     }
+
+    public function orderTotal() {
+        $orderTotal = 0;
+
+        foreach($this->workprocess as $workprocess) {
+            $orderTotal += $workprocess->price;
+        }
+
+        return $orderTotal;
+    }
 }

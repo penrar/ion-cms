@@ -53,15 +53,15 @@ class OrderController extends Controller
                     $q->where('customerable_type', '=', 'App\Contact');
                 })
                 ->where(function ($query) use ($request) {
-                    $query->where('contacts.first_name', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('contacts.last_name', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('orders.enterprise_order_number', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.zip_code', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
+                    $query->where('contacts.first_name', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('contacts.last_name', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('orders.enterprise_order_number', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address2', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.state', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.city', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.zip_code', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address1', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address2', 'like', '%'.trim($request->input('search')).'%');
                 })
                 ->orderBy('orders.sla_date',  $request->input('searchDirection'))
                 ->get();
@@ -75,14 +75,14 @@ class OrderController extends Controller
                 ->join('companies', 'companies.id', '=', 'customers.customerable_id')
                 ->join('properties', 'orders.property_id', '=', 'properties.id')
                 ->where(function ($query) use ($request) {
-                    $query->where('companies.company_name', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('orders.enterprise_order_number', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.state', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.city', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.zip_code', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address1', 'like', '%'.$request->input('search').'%')
-                        ->orWhere('properties.address2', 'like', '%'.$request->input('search').'%');
+                    $query->where('companies.company_name', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address2', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('orders.enterprise_order_number', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.state', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.city', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.zip_code', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address1', 'like', '%'.trim($request->input('search')).'%')
+                        ->orWhere('properties.address2', 'like', '%'.trim($request->input('search')).'%');
                 })
                 ->orderBy('orders.sla_date', $request->input('searchDirection'))
                 ->get();
